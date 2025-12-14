@@ -1,1 +1,0 @@
--record(invalid_underscore_position, {index :: integer()}).

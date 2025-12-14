@@ -1,8 +1,11 @@
 import gleam/int
+import gleam/io
 import gleam/list
 import gleam/option.{type Option, None, Some}
 import gleam/result.{unwrap}
 import gleam/string
+
+import argv
 import lenient_parse
 import simplifile.{read}
 
@@ -86,26 +89,31 @@ pub fn update(dial: Dial, rotation: Rotation) -> Dial {
 }
 
 pub fn main() -> Nil {
-  let assert Ok(contents) = read(from: "day1-input")
-  let lines = string.split(contents, "\n")
+  case argv.load().arguments {
+    [filepath, ..] -> {
+      let assert Ok(contents) = read(from: filepath)
+      let lines = string.split(contents, "\n")
 
-  let dial: Dial =
-    list.fold(
-      lines,
-      Dial(current: 50, zeros: 0),
-      fn(dial: Dial, line: String) -> Dial {
-        echo line
-        case new_rotation(line) {
-          Some(rotation) -> {
-            update(dial, rotation)
-            |> echo
-          }
-          None -> dial
-        }
-      },
-    )
+      let dial: Dial =
+        list.fold(
+          lines,
+          Dial(current: 50, zeros: 0),
+          fn(dial: Dial, line: String) -> Dial {
+            echo line
+            case new_rotation(line) {
+              Some(rotation) -> {
+                update(dial, rotation)
+                |> echo
+              }
+              None -> dial
+            }
+          },
+        )
 
-  echo dial
+      echo dial
 
-  Nil
+      Nil
+    }
+    [] -> io.println_error("Usage: gleam run -m ao25/day1 $FILE")
+  }
 }

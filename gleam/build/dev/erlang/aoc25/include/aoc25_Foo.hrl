@@ -1,1 +1,0 @@
--record(foo, {x :: float()}).

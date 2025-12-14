@@ -1,1 +1,0 @@
--record(invalid_decimal_position, {index :: integer()}).

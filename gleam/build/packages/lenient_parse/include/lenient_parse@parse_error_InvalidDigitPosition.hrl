@@ -1,1 +1,0 @@
--record(invalid_digit_position, {index :: integer(), character :: binary()}).

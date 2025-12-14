@@ -1,1 +1,0 @@
--record(left, {num :: integer()}).

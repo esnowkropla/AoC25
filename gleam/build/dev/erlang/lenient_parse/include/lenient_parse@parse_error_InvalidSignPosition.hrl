@@ -1,1 +1,0 @@
--record(invalid_sign_position, {index :: integer(), character :: binary()}).

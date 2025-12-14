@@ -1,0 +1,1 @@
+-record(dial, {current :: integer(), zeros :: integer()}).

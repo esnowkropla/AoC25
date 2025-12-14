@@ -1,0 +1,1 @@
+-record(out_of_float_range, {float_string :: binary()}).

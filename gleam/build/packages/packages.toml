@@ -1,0 +1,8 @@
+[packages]
+lenient_parse = "3.0.1"
+bigi = "4.1.0"
+simplifile = "2.3.1"
+gleeunit = "1.9.0"
+filepath = "1.1.2"
+gleam_stdlib = "0.67.1"
+gleam_deque = "1.0.0"

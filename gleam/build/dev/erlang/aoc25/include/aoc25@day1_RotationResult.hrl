@@ -1,0 +1,1 @@
+-record(rotation_result, {dial :: integer(), zeros_hit :: integer()}).

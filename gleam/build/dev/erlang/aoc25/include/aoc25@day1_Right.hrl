@@ -1,0 +1,1 @@
+-record(right, {num :: integer()}).

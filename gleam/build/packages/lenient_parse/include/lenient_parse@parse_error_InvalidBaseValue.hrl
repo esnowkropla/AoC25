@@ -1,0 +1,1 @@
+-record(invalid_base_value, {base :: integer()}).

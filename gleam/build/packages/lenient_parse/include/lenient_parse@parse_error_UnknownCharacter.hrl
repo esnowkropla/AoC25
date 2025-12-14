@@ -1,0 +1,1 @@
+-record(unknown_character, {index :: integer(), character :: binary()}).

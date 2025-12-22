@@ -18,10 +18,9 @@ defmodule Benchmark do
   def run(input_text, workers, iterations) do
     times =
       for _ <- 1..iterations do
-        {time_us, result} =
+        {time_us, _result} =
           :timer.tc(fn ->
             Aoc25.Day2.process_input(input_text, workers)
-            |> Enum.to_list()
           end)
 
         time_us
@@ -69,6 +68,7 @@ IO.puts("")
 IO.puts(String.duplicate("=", 80))
 IO.puts("Results:")
 IO.puts(String.duplicate("-", 80))
+
 IO.puts(
   String.pad_trailing("Workers", 10) <>
     String.pad_trailing("Avg Time", 15) <>
@@ -76,6 +76,7 @@ IO.puts(
     String.pad_trailing("Max Time", 15) <>
     "Speedup"
 )
+
 IO.puts(String.duplicate("-", 80))
 
 baseline_time = elem(hd(results), 1)

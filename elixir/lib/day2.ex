@@ -1,19 +1,32 @@
 defmodule Aoc25.Day2 do
-  import Enum, only: [split: 2, count: 1]
-
   @pattern ~r/(\d+)-(\d+)/
 
   def pattern, do: @pattern
 
+  def invalid?(id) when id < 10, do: false
+
   def invalid?(id) when is_integer(id) do
     digits = Integer.digits(id)
+    size = Enum.count(digits)
 
-    {first, rest} = split(digits, Integer.floor_div(count(digits), 2))
-
-    first == rest
+    1..Integer.floor_div(size, 2)
+    |> Enum.map(fn n ->
+      digits
+      |> Enum.chunk_every(n)
+      |> parts_equal?
+    end)
+    |> Enum.any?()
   end
 
   def invalid?(_id), do: false
+
+  def parts_equal?([first | rest] = parts) when is_list(parts) do
+    rest
+    |> Enum.map(&(&1 == first))
+    |> Enum.all?()
+  end
+
+  def parts_equal?(_), do: false
 
   def process_input(text, workers \\ 1) do
     Regex.scan(@pattern, text, capture: :all_but_first)

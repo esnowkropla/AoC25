@@ -3,25 +3,37 @@ defmodule Aoc25.Day2Test do
 
   import Aoc25.Day2
 
-  describe "valid?/1" do
+  describe "invalid?/1" do
     test "empty id" do
-      assert valid?(nil)
+      refute invalid?(nil)
+    end
+
+    test "single digit id" do
+      refute invalid?(2)
     end
 
     test "odd length id" do
-      assert valid?(123)
+      refute invalid?(123)
     end
 
     test "even length id" do
-      assert valid?(1234)
+      refute invalid?(1234)
     end
 
     test "id is pair" do
-      refute valid?(55)
+      assert invalid?(55)
     end
 
     test "id matches pattern" do
-      refute valid?(38_593_859)
+      assert invalid?(38_593_859)
+    end
+
+    test "short pattern repeated multiples" do
+      assert invalid?(111)
+    end
+
+    test "long pattern repeated multiples" do
+      assert invalid?(121_212)
     end
   end
 end

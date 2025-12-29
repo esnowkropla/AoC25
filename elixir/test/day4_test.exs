@@ -96,4 +96,12 @@ defmodule Aoc25.Day4Test do
       refute accessible?(board, {4, 3})
     end
   end
+
+  describe "#total_removable" do
+    setup do: %{board: read_input(@full_board)}
+
+    test "it iteratively removes and sums accessible elements", %{board: board} do
+      assert total_removable(board) == 43
+    end
+  end
 end

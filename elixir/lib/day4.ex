@@ -1,6 +1,16 @@
 defmodule Aoc25.Day4 do
   @full ?@
 
+  def total_removable(board, running_total \\ 0) do
+    case Enum.split_with(board, fn cell -> accessible?(board, cell) end) do
+      {[], _blocked_cells} ->
+        running_total
+
+      {accessible_cells, blocked} ->
+        total_removable(MapSet.new(blocked), running_total + Enum.count(accessible_cells))
+    end
+  end
+
   def occupied?(board, coords) do
     MapSet.member?(board, coords)
   end
@@ -14,7 +24,9 @@ defmodule Aoc25.Day4 do
   end
 
   def neighbours({x0, y0}) do
-    for x <- [x0 - 1, x0, x0 + 1], y <- [y0 - 1, y0, y0 + 1], x != x0 or y != y0 do
+    for x <- (x0 - 1)..(x0 + 1),
+        y <- (y0 - 1)..(y0 + 1),
+        x != x0 or y != y0 do
       {x, y}
     end
   end

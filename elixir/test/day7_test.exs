@@ -23,6 +23,12 @@ defmodule Aoc25.Day7Test do
   """
 
   describe "#iterate_grid" do
+    setup [:raw_grid]
+
+    test "it counts the splitter hits", %{raw_grid: grid} do
+      out_grid = iterate_grid(grid)
+      assert out_grid.count == 21
+    end
   end
 
   describe "#find_source" do
